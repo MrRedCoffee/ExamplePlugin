@@ -1,0 +1,20 @@
+name: Example
+version: 1.0
+main: com.arisia.example.Example
+api-version: 1.19
+authors: [ MrRedCoffee ]
+load: POSTWORLD
+commands:
+  exemplo1:
+    description: exemplo 2.
+    usage: /exemplo1
+    permission: example.command.exemplo1
+  exemplo2:
+    description: exemplo 2.
+    usage: /exemplo2
+    permission: example.command.exemplo2
+permissions:
+  example.command.exemplo1:
+    default: op
+  example.command.exemplo2:
+    default: true

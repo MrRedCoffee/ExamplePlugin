@@ -1,0 +1,275 @@
+# If you want to know more about bank guis: https://github.com/Pulsih/BankPlus/wiki
+Title: "&a&lBANK"
+Lines: 5
+Update-Delay: 10 #In ticks, put 0 to disable
+Filler:
+  Enabled: true
+  Material: "WHITE_STAINED_GLASS_PANE"
+  Glowing: false
+
+# If the settings are not specified and the multiple
+# bank module is enabled, the plugin will use the
+# default item format to show the bank.
+Settings:
+  # The permission needed to open the bank, remove
+  # or put "" to make it accessible to everyone.
+  Permission: "bankplus.use"
+
+  # This is the item that will be showed up in the
+  # banks-gui if the multiple-banks module is enabled.
+  #
+  # You can also use heads and placeholders.
+  BanksGuiItem:
+    # The item showed in the banks gui
+    # if this bank is available.
+    Available:
+      Material: "CHEST"
+      Displayname: "&a&lBANK"
+      Lore:
+        - "&aYour main bank :)"
+        - ""
+        - "&7Bank capacity: &a%bankplus_capacity{bank}%"
+        - "&7Bank level: &a%bankplus_level{bank}%"
+        - "&7Bank money: &a%bankplus_balance_formatted{bank}%"
+        - ""
+        - "&aAvailable: &2YES"
+      Glowing: true
+
+    # The item showed in the banks gui
+    # if this bank is unavailable.
+    Unavailable:
+      Material: "CHEST"
+      Displayname: "&a&lBANK"
+      Lore:
+        - "&aYour main bank :)"
+        - ""
+        - "&7Bank capacity: &a%bankplus_capacity{bank}%"
+        - "&7Bank level: &a%bankplus_level{bank}%"
+        - "&7Bank money: &a%bankplus_balance_formatted{bank}%"
+        - ""
+        - "&aAvailable: &cNO"
+        - "&aNeeded permission: &bbankplus.use"
+      Glowing: true
+
+# These are the bank upgrades, you can upgrade a bank
+# by running the command /bank upgrade <bank> or by
+# using the action in the gui "Upgrade".
+#
+# If the Upgrades section isn't specified, the bank will
+# have no upgrades and will use the default values set
+# in the config.yml
+Upgrades:
+  # This must be a number an indicates the bank level.
+  1: # 1 Is the default level, it can't be lower than 1.
+    Capacity: "50000"
+    Interest: "5%"
+  2:
+    # The cost that a player will need to
+    # pay to upgrade the bank to level 2.
+    Cost: "5000"
+    # If the capacity is not specified, the bank will
+    # have the default capacity set in the config.yml
+    Capacity: "100000"
+    # If the interest is not specified, the bank will
+    # use the default interest rate from the config.yml
+    Interest: "10%"
+  3:
+    Cost: "10000"
+    Capacity: "200000"
+    Interest: "15%"
+
+
+Items:
+  # You can add as many items as you want
+  # and not only for make the bank work
+  WithdrawButton1:
+    Material: "EMERALD"
+    Amount: 1
+    Displayname: "&8&l[&9&lWITHDRAW&8&l] &9500$"
+    Slot: 11
+    # You can not edit the custom
+    # model data of an item.
+    #
+    # Working only on 1.14.4+
+    #CustomModelData: 10
+    Lore:
+      - ""
+      - "&9&l* &aWithdraw &9500$ &afrom your bank."
+      - ""
+    Glowing: true
+    Actions:
+      # Action list:
+      # * The amount can be a number, a % or "CUSTOM"
+      # - [WITHDRAW] <amount>
+      # - [DEPOSIT] <amount>
+      # - [UPGRADE] ( As the name says, is a shortcut for the command /bank upgrade )
+      # - [PLAYER] <chat> ( Force the player to chat, it can also be a command. )
+      # - [CONSOLE] <command> ( Without "/"! | Execute a console command. )
+      # - [MESSAGE] <message> ( Send a message to the player. )
+      - "[WITHDRAW] 500"
+
+  WithdrawButton2:
+    Material: "EMERALD"
+    Amount: 1
+    Displayname: "&8&l[&9&lWITHDRAW&8&l] &925%"
+    Slot: 12
+    Lore:
+      - ""
+      - "&9&l* &aWithdraw &925% &aof the money from your bank."
+      - ""
+    Glowing: true
+    Actions:
+      - "[WITHDRAW] 25%"
+
+  WithdrawButton3:
+    Material: "EMERALD"
+    Amount: 1
+    Displayname: "&8&l[&9&lWITHDRAW&8&l] &950%"
+    Slot: 21
+    Lore:
+      - ""
+      - "&9&l* &aWithdraw &950% &aof the money from your bank."
+      - ""
+    Glowing: true
+    Actions:
+      - "[WITHDRAW] 50%"
+
+  WithdrawButton4:
+    Material: "EMERALD"
+    Amount: 1
+    Slot: 20
+    Displayname: "&8&l[&9&lWITHDRAW&8&l] &9ALL"
+    Lore:
+      - ""
+      - "&9&l* &aWithdraw &9ALL &amoney from your bank."
+      - ""
+    Glowing: true
+    Actions:
+      - "[WITHDRAW] 100%"
+
+  WithdrawButton5:
+    Material: "EMERALD"
+    Amount: 1
+    Slot: 30
+    Displayname: "&8&l[&9&lWITHDRAW&8&l] &9CUSTOM"
+    Lore:
+      - ""
+      - "&9&l* &aWithdraw a &9custom &aamount from"
+      - "      &ayour bank through chat."
+      - ""
+    Glowing: true
+    Actions:
+      - "[WITHDRAW] CUSTOM"
+
+  Personal-Info:
+    Material: "HEAD-%PLAYER%"
+    Displayname: "&9&l* &a&lPERSONAL"
+    Slot: 14
+    Lore:
+      - ""
+      - "&7Account Name: &a%player_name%"
+      - "&7Balance: &a%bankplus_balance_formatted%"
+      - "&7Capacity: &a%bankplus_capacity_formatted%"
+      - ""
+      - "&7Wait &a%bankplus_interest_cooldown% &7to get interest!"
+      - "&7Expected money from the next interest: &a%bankplus_next_interest_formatted%"
+      - "&7Interest rate: &a%bankplus_interest_rate%"
+      - ""
+      - "&7&o(( %bankplus_withdraw_taxes% Withdraw Taxes. %bankplus_deposit_taxes% Deposit Taxes. ))"
+    Glowing: true
+
+  How-Does-It-Work:
+    Material: "HEAD-<eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzU3NDcwMTBkODRhYTU2NDgzYjc1ZjYyNDNkOTRmMzRjNTM0NjAzNTg0YjJjYzY4YTQ1YmYzNjU4NDAxMDVmZCJ9fX0=>"
+    Displayname: "&9&l* &a&lHOW DOES IT WORK?"
+    Slot: 23
+    Lore:
+      - ""
+      - "&7This is a bank, you can &adeposit &7all your"
+      - "&7money here to keep them &asafe&7, your money"
+      - "&7kept in the bank will &aincrease &7thanks to"
+      - "&7the &a&ninterest&7, which gives you a percentage of"
+      - "&7your money in the &abank&7!"
+      - ""
+    Glowing: true
+
+  Upgrade:
+    Material: "DIAMOND"
+    Amount: 1
+    Slot: 32
+    Displayname: "&9&l* &a&lUPGRADE BANK"
+    Lore:
+      - ""
+      - "&7Upgrade your bank to the next level!"
+      - ""
+      - "&7Current level: &a%bankplus_level%"
+      - "&7Upgrade Cost: &a%bankplus_next_level_cost%"
+      - ""
+    Glowing: true
+    Actions:
+      - "[UPGRADE]"
+
+  DepositButton1:
+    Material: "EMERALD"
+    Amount: 1
+    Slot: 17
+    Displayname: "&8&l[&a&lDEPOSIT&8&l] &a500$"
+    Lore:
+      - ""
+      - "&a&l* &9Deposit &a500$ &9in your bank."
+      - ""
+    Glowing: true
+    Actions:
+      - "[DEPOSIT] 500"
+
+  DepositButton2:
+    Material: "EMERALD"
+    Amount: 1
+    Slot: 16
+    Displayname: "&8&l[&a&lDEPOSIT&8&l] &a25%"
+    Lore:
+      - ""
+      - "&a&l* &9Deposit &a25% &9of your money in your bank."
+      - ""
+    Glowing: true
+    Actions:
+      - "[DEPOSIT] 25%"
+
+  DepositButton3:
+    Material: "EMERALD"
+    Amount: 1
+    Slot: 25
+    Displayname: "&8&l[&a&lDEPOSIT&8&l] &a50%"
+    Lore:
+      - ""
+      - "&a&l* &9Deposit &a50% &9of your money in your bank."
+      - ""
+    Glowing: true
+    Actions:
+      - "[DEPOSIT] 50%"
+
+  DepositButton4:
+    Material: "EMERALD"
+    Amount: 1
+    Slot: 26
+    Displayname: "&8&l[&a&lDEPOSIT&8&l] &aALL"
+    Lore:
+      - ""
+      - "&a&l* &9Deposit &aALL &9money in your bank."
+      - ""
+    Glowing: true
+    Actions:
+      - "[DEPOSIT] 100%"
+
+  DepositButton5:
+    Material: "EMERALD"
+    Amount: 1
+    Slot: 34
+    Displayname: "&8&l[&a&lDEPOSIT&8&l] &aCUSTOM"
+    Lore:
+      - ""
+      - "&a&l* &9Deposit a &acustom &9amount in"
+      - "   &9your bank through chat."
+      - ""
+    Glowing: true
+    Actions:
+      - "[DEPOSIT] CUSTOM"
